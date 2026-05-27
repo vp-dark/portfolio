@@ -3,157 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Writer Portfolio | High-Impact Copy & Strategy</title>
+    <meta name="description" content="Portfolio">
+    <title>VP Portfolio</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #1d1d1b;
-            --text: #fde4e4;
-            --secondary: #945555;
-            --accent: #53c0e1;
-            --spacing: 4rem;
-            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* Spacious Layout Container */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        header {
-            padding: 4rem 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo { font-weight: 600; letter-spacing: -0.5px; font-size: 1.2rem; }
-
-        /* Hero Section */
-        .hero {
-            padding: 10rem 0 15rem 0;
-            max-width: 800px;
-        }
-
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
-            line-height: 1.1;
-            margin-bottom: 2rem;
-            font-weight: 700;
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            color: var(--secondary);
-            font-weight: 300;
-        }
-
-        /* Work Grid */
-        .section-label {
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            color: var(--secondary);
-            margin-bottom: 3rem;
-            display: block;
-        }
-
-        .work-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 8rem;
-            padding-bottom: 10rem;
-        }
-
-        .project {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-            transition: var(--transition);
-        }
-
-        .project-meta {
-            font-size: 0.9rem;
-            color: var(--secondary);
-            margin-bottom: 0.5rem;
-        }
-
-        .project-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            transition: var(--transition);
-        }
-
-        .project:hover .project-title {
-            padding-left: 1rem;
-            color: var(--secondary);
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 10rem 0;
-            border-top: 1px solid #eee;
-            text-align: center;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1.5rem 4rem;
-            background: var(--accent);
-            color: white;
-            text-decoration: none;
-            border-radius: 100px;
-            font-weight: 600;
-            margin-top: 2rem;
-            transition: var(--transition);
-        }
-
-        .cta-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-
-        footer {
-            padding: 4rem 0;
-            font-size: 0.8rem;
-            color: var(--secondary);
-            display: flex;
-            justify-content: space-between;
-        }
-
-        /* Entrance Animation */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        @media (max-width: 768px) {
-            .hero { padding: 5rem 0; }
-            .project-title { font-size: 1.8rem; }
-        }
-    </style>
 </head>
 <body>
 
@@ -210,24 +65,6 @@
         </footer>
     </div>
 
-    <script>
-        // Simple Intersection Observer for scroll animations
-        const observerOptions = {
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-        
-        // Console Greeting for potential tech-savvy employers
-        console.log("%cLike what you see? Let's work together.", "color: #000; font-size: 20px; font-weight: bold;");
-    </script>
+   <script src="script.js"></script>
 </body>
 </html>
