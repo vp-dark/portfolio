@@ -1,70 +1,757 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio">
-    <title>VP Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VP — Content Writer Portfolio</title>
+<meta name="description" content="VP is a fresher content writer crafting clear, engaging copy — blogs, SEO articles, social posts and brand stories. View selected work, posters and thumbnails.">
+
+<meta property="og:title" content="VP — Content Writer">
+<meta property="og:description" content="Fresher content writer crafting clear, engaging copy — blogs, SEO articles, social posts and brand stories.">
+<meta property="og:type" content="website">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="VP — Content Writer">
+<meta name="twitter:description" content="Fresher content writer crafting clear, engaging copy — blogs, SEO articles, social posts and brand stories.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "VP",
+  "jobTitle": "Content Writer",
+  "description": "Fresher content writer specializing in blogs, SEO articles, social copy and brand storytelling."
+}
+</script>
+
+<style>
+  :root {
+    --bg: #F7F4EE;
+    --bg-alt: #EFEAE0;
+    --card: #FFFFFF;
+    --ink: #201E1B;
+    --ink-soft: #5B564D;
+    --red: #B8412B;
+    --blue: #2F4C66;
+    --border: #DEd8C9;
+
+    --font-display: "Fraunces", Georgia, serif;
+    --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+    --radius: 10px;
+    --max-w: 1100px;
+  }
+
+  html[data-theme="dark"] {
+    --bg: #14171A;
+    --bg-alt: #1C2024;
+    --card: #1E2226;
+    --ink: #ECE9E2;
+    --ink-soft: #A6A199;
+    --red: #E07152;
+    --blue: #7FA6C9;
+    --border: #2C3136;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    transition: background .3s ease, color .3s ease;
+    overflow-x: hidden;
+  }
+
+  .mono { font-family: var(--font-mono); }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 600; margin: 0; }
+  a { color: inherit; }
+
+  /* ===== Ambient background: rotating simple shapes ===== */
+  .bg-shapes {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .bg-shapes span {
+    position: absolute;
+    border: 2px solid var(--border);
+    opacity: .5;
+    animation: spin linear infinite;
+  }
+  .shape-circle { border-radius: 50%; }
+  .shape-square { border-radius: 4px; }
+  .shape-triangle {
+    width: 0; height: 0;
+    border: none !important;
+  }
+  .shape-triangle::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-left: 26px solid transparent;
+    border-right: 26px solid transparent;
+    border-bottom: 44px solid var(--border);
+    opacity: .5;
+  }
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bg-shapes span { animation: none; }
+  }
+
+  /* ===== Header / Nav ===== */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .logo {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .logo-dot { color: var(--red); }
+
+  .site-nav { display: flex; gap: 28px; }
+  .nav-link {
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-size: .95rem;
+    font-weight: 500;
+    position: relative;
+    padding: 4px 0;
+    transition: color .2s ease;
+  }
+  .nav-link:hover, .nav-link.active { color: var(--ink); }
+  .nav-link.active::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: -4px;
+    width: 100%; height: 2px;
+    background: var(--red);
+  }
+
+  .header-actions { display: flex; align-items: center; gap: 10px; }
+
+  .theme-toggle {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--ink);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    padding: 0;
+  }
+  .theme-toggle svg { width: 18px; height: 18px; display: block; }
+  .theme-toggle .icon-moon { display: none; }
+  html[data-theme="dark"] .theme-toggle .icon-sun { display: none; }
+  html[data-theme="dark"] .theme-toggle .icon-moon { display: block; }
+
+  .menu-toggle {
+    display: none;
+    width: 38px; height: 38px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--card);
+    cursor: pointer;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+  .menu-toggle span {
+    width: 18px; height: 2px;
+    background: var(--ink);
+    transition: transform .25s ease, opacity .25s ease;
+  }
+  .menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .menu-toggle.open span:nth-child(2) { opacity: 0; }
+  .menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ===== Layout ===== */
+  main { position: relative; z-index: 1; }
+  .section { max-width: var(--max-w); margin: 0 auto; padding: 90px 24px; }
+  .section-title { font-size: clamp(1.8rem, 4vw, 2.4rem); display: inline-block; position: relative; }
+  .section-sub { color: var(--ink-soft); margin-top: 10px; max-width: 60ch; }
+
+  .underline-svg {
+    display: block;
+    width: 100%;
+    max-width: 220px;
+    height: 14px;
+    margin-top: 2px;
+  }
+  .underline-svg path {
+    fill: none;
+    stroke: var(--red);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-dasharray: 240;
+    stroke-dashoffset: 240;
+    transition: stroke-dashoffset 1s ease;
+  }
+  .section-title.in-view .underline-svg path { stroke-dashoffset: 0; }
+
+  /* ===== Hero ===== */
+  .hero { min-height: 70vh; display: flex; align-items: center; padding-top: 60px; position: relative; }
+  .hero-inner { max-width: 780px; }
+  .eyebrow { color: var(--red); letter-spacing: .04em; margin-bottom: 14px; }
+  .hero-title { font-size: clamp(2.2rem, 6vw, 3.4rem); line-height: 1.2; }
+  .ink-name { color: var(--red); }
+  .hero-sub { margin-top: 22px; font-size: 1.1rem; color: var(--ink-soft); max-width: 55ch; }
+  .hero-cta { display: flex; gap: 14px; margin-top: 30px; flex-wrap: wrap; }
+
+  /* ===== Buttons ===== */
+  .btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: .95rem;
+    transition: transform .2s ease, background .2s ease;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+  }
+  .btn-primary { background: var(--red); color: #fff; }
+  .btn-primary:hover { transform: translateY(-2px); }
+  .btn-ghost { border: 1px solid var(--border); color: var(--ink); background: transparent; }
+  .btn-ghost:hover { border-color: var(--red); color: var(--red); }
+
+  /* ===== About ===== */
+  .about-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 60px; margin-top: 40px; }
+  .about-copy p { color: var(--ink-soft); }
+  .skills { list-style: none; padding: 0; margin: 24px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
+  .skills li { border: 1px solid var(--border); padding: 7px 14px; border-radius: 999px; font-size: .85rem; font-family: var(--font-mono); }
+
+  .small-label { color: var(--ink-soft); text-transform: uppercase; font-size: .78rem; letter-spacing: .06em; margin: 0 0 18px; }
+
+  .timeline { list-style: none; padding: 0; margin: 0; border-left: 2px solid var(--border); }
+  .timeline li { position: relative; padding: 0 0 22px 22px; }
+  .timeline-dot { position: absolute; left: -6px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: var(--red); }
+  .timeline-role { margin: 0; font-weight: 600; }
+  .timeline-meta { color: var(--ink-soft); font-size: .8rem; margin: 4px 0 0; }
+  .timeline-note { color: var(--ink-soft); font-size: .85rem; margin-top: 10px; }
+
+  /* ===== Work ===== */
+  .work-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; margin-top: 40px; }
+  .work-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px; transition: transform .25s ease, box-shadow .25s ease; }
+  .work-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,.06); }
+  .work-index { color: var(--red); margin: 0 0 8px; font-size: .85rem; }
+  .work-card h3 { font-size: 1.15rem; margin-bottom: 8px; }
+  .work-tag { color: var(--ink-soft); font-size: .78rem; margin: 0 0 12px; }
+  .work-desc { color: var(--ink-soft); font-size: .92rem; margin: 0 0 16px; }
+  .work-link { text-decoration: none; color: var(--blue); font-weight: 600; font-size: .9rem; }
+  .work-link:hover { color: var(--red); }
+
+  /* ===== Posters ===== */
+  .poster-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 34px; }
+  .poster-card {
+    margin: 0; aspect-ratio: 4/5; border-radius: var(--radius); border: 1px solid var(--border);
+    display: flex; align-items: flex-end; padding: 14px; background-size: cover; background-position: center;
+    position: relative; overflow: hidden;
+  }
+  .poster-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .poster-card figcaption {
+    position: relative; color: #fff; font-family: var(--font-mono); font-size: .78rem;
+    background: rgba(0,0,0,.45); padding: 6px 10px; border-radius: 6px;
+  }
+  .poster-1 { background: linear-gradient(155deg, #B8412B, #E0A46B); }
+  .poster-2 { background: linear-gradient(155deg, #2F4C66, #6FA5C9); }
+  .poster-3 { background: linear-gradient(155deg, #4C5B3A, #A3B87C); }
+  .poster-4 { background: linear-gradient(155deg, #6B4C8A, #C79AD1); }
+  .poster-5 { background: linear-gradient(155deg, #8A4C4C, #D19A9A); }
+  .poster-6 { background: linear-gradient(155deg, #3A5B5B, #7CC1B8); }
+  .poster-note { color: var(--ink-soft); font-size: .78rem; margin-top: 18px; }
+  .poster-card { cursor: pointer; }
+
+  /* ===== Lightbox ===== */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.85);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lightbox-content img {
+    display: block;
+    max-width: 90vw;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    border-radius: 8px;
+    object-fit: contain;
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 20px; right: 30px;
+    color: #fff;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  /* ===== Contact ===== */
+  .contact-grid { display: grid; grid-template-columns: .9fr 1.4fr; gap: 50px; margin-top: 40px; }
+  .contact-copy p { color: var(--ink-soft); }
+  .contact-list { list-style: none; padding: 0; margin: 18px 0 0; display: flex; flex-direction: column; gap: 10px; }
+  .contact-list a { text-decoration: none; color: var(--ink); font-size: .92rem; }
+  .contact-list a:hover { color: var(--red); }
+
+  .contact-form { display: flex; flex-direction: column; gap: 8px; }
+  .contact-form label { font-size: .82rem; color: var(--ink-soft); margin-top: 10px; }
+  .contact-form input, .contact-form textarea {
+    padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--card); color: var(--ink); font-family: var(--font-body); font-size: .95rem; resize: vertical;
+  }
+  .contact-form input:focus, .contact-form textarea:focus { outline: 2px solid var(--red); outline-offset: 1px; }
+  .contact-form button { margin-top: 16px; align-self: flex-start; }
+  .form-note { min-height: 1.2em; color: var(--red); }
+
+  /* ===== Footer ===== */
+  .site-footer { text-align: center; padding: 30px 24px 50px; color: var(--ink-soft); font-size: .85rem; position: relative; z-index: 1; }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 860px) {
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 34px; }
+    .work-grid { grid-template-columns: 1fr; }
+    .poster-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 720px) {
+    .site-nav {
+      position: fixed; top: 68px; left: 0; right: 0; background: var(--bg);
+      border-bottom: 1px solid var(--border); flex-direction: column; padding: 16px 24px 24px; gap: 16px;
+      transform: translateY(-120%); opacity: 0; transition: transform .3s ease, opacity .3s ease;
+    }
+    .site-nav.open { transform: translateY(0); opacity: 1; }
+    .menu-toggle { display: flex; }
+    .poster-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 480px) {
+    .section { padding: 64px 18px; }
+    .poster-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  }
+</style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <div class="logo">VP</div>
-            <nav>
-                <a href="mailto:vpw988@gmail.com" style="text-decoration: none; color: var(--text); font-weight: 600;">Contact</a>
-            </nav>
-        </header>
+<div class="bg-shapes" aria-hidden="true">
+  <span class="shape-circle" style="width:90px;height:90px;top:12%;left:6%;animation-duration:38s;"></span>
+  <span class="shape-square" style="width:60px;height:60px;top:65%;left:12%;animation-duration:26s;"></span>
+  <span class="shape-circle" style="width:50px;height:50px;top:30%;left:85%;animation-duration:32s;"></span>
+  <span class="shape-square" style="width:80px;height:80px;top:75%;left:80%;animation-duration:44s;"></span>
+  <span class="shape-triangle" style="top:48%;left:50%;animation-duration:50s;"></span>
+  <span class="shape-circle" style="width:36px;height:36px;top:8%;left:45%;animation-duration:22s;"></span>
+</div>
 
-        <section class="hero reveal">
-            <h1>I write words that drive growth and build brands.</h1>
-            <p>Freelance Writer & Content Strategist specializing in short form and long-form storytelling.</p>
-        </section>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#overview" class="logo">VP<span class="logo-dot">.</span></a>
 
-        <main>
-            <span class="section-label reveal">Selected Work</span>
-            <div class="work-grid">
-                
-                <!-- Project 1 -->
-                <a href="https://medium.com/@vpw988/how-to-choose-a-stream-after-10th-grade-3-smart-steps-to-decide-your-future-939107460f76" class="project reveal">
-                    <div class="project-meta">For students.</div>
-                    <h2 class="project-title">How to Choose a Stream After 10th Grade — 3 Smart Steps to Decide Your Future.</h2>
-                    <p>A deep dive into student's condition and choices.</p>
-                </a>
+    <nav class="site-nav" id="siteNav">
+      <a href="#overview" class="nav-link active">Overview</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#work" class="nav-link">My Works</a>
+      <a href="#posters" class="nav-link">Posters</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
 
-                <!-- Project 2 -->
-                <a href="https://medium.com/@vpw988/cyber-war-a-war-with-no-borders-2de2d0bff1f8" class="project reveal">
-                    <div class="project-meta">For Techies.</div>
-                    <h2 class="project-title">CYBER WAR — A WAR WITH NO BORDERS.</h2>
-                    <p>A discussion about increasing cyberwarfare.</p>
-                </a>
-
-                <!-- Project 3 -->
-                <a href="#" class="project reveal">
-                    <div class="project-meta">Coming Soon...</div>
-                    <h2 class="project-title">Coming Soon...</h2>
-                    <p>Coming soon...</p>
-                </a>
-
-            </div>
-        </main>
-
-        <section class="contact reveal">
-            <span class="section-label">Available for New Projects</span>
-            <h2>Let's tell your story.</h2>
-            <a href="mailto:vpw988@gmail.com" class="cta-button">Get in Touch</a>
-        </section>
-
-        <footer>
-            <div>&copy; 2026 VP, All Rights Reserved.</div>
-            <div>Built for clarity and results.</div>
-        </footer>
+    <div class="header-actions">
+      <button id="themeToggle" type="button" class="theme-toggle" aria-label="Toggle dark mode" aria-pressed="false">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z"/></svg>
+      </button>
+      <button id="menuToggle" type="button" class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </div>
+</header>
 
-   <script src="script.js"></script>
+<main>
+
+  <section id="overview" class="section hero">
+    <div class="hero-inner">
+      <p class="eyebrow mono">Portfolio</p>
+      <h1 class="hero-title">Hi, I'm <span class="ink-name">VP</span> — a content writer.</h1>
+      <p class="hero-sub">Also a part time graphic designer</p>
+      <p class="hero-sub">
+        I turn blank pages into blogs, SEO articles and social copy people actually finish reading.
+        Fresh to the field, serious about the craft.
+      </p>
+      <div class="hero-cta">
+        <a href="#work" class="btn btn-primary">Read my work</a>
+        <a href="#contact" class="btn btn-ghost">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <h2 class="section-title" data-underline>About</h2>
+
+    <div class="about-grid">
+      <div class="about-copy">
+        <p>
+          I'm VP, a fresher content writer who enjoys turning ideas into words that hold attention.
+          I write blogs, product descriptions, SEO articles and social captions — always aiming for
+          copy that's clear first, clever second.
+        </p>
+        <p>
+          I'm still early in my career, which means I write with curiosity, take feedback seriously,
+          and I'm quick to pick up a brand's voice. Currently open to internships, freelance briefs
+          and entry-level writing roles.
+        </p>
+
+        <ul class="skills">
+          <li>Blog Writing</li>
+          <li>SEO Content</li>
+          <li>Social Media Copy</li>
+          <li>Product Descriptions</li>
+          <li>Proofreading &amp; Editing</li>
+          <li>Basic Keyword Research</li>
+        </ul>
+      </div>
+
+      <div class="about-experience">
+        <h3 class="mono small-label">Experience</h3>
+        <ol class="timeline">
+          <li>
+            <span class="timeline-dot"></span>
+            <div>
+              <p class="timeline-role">Freelance Content Writer</p>
+              <p class="timeline-meta mono">2025 — Present</p>
+            </div>
+          </li>
+          <li>
+            <span class="timeline-dot"></span>
+            <div>
+              <p class="timeline-role">School, College Event Writer &amp; Article Writer</p>
+              <p class="timeline-meta mono">2018 — 2025</p>
+            </div>
+          </li>
+        </ol>
+        <p class="timeline-note">New to the field and building steadily.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="work" class="section">
+    <h2 class="section-title" data-underline>My Works</h2>
+    <p class="section-sub">A few pieces to share. More being added as I go.</p>
+
+    <div class="work-grid">
+
+      <article class="work-card">
+        <p class="work-index mono">01</p>
+        <h3>How Phishing Works -- Maybe on you too?</h3>
+        <p class="work-tag mono">Blog · Cybersecurity</p>
+        <p class="work-desc">A listicle blog post written without any use of ai.</p>
+        <a href="#" class="work-link">Read piece →</a>
+      </article>
+
+      <article class="work-card">
+        <p class="work-index mono">02</p>
+        <h3>Cybersecurity Era</h3>
+        <p class="work-tag mono">Cybersecurity</p>
+        <p class="work-desc">Written with the help and use of ai.</p>
+        <a href="#" class="work-link">Read piece →</a>
+      </article>
+<!-- 
+      <article class="work-card">
+        <p class="work-index mono">03</p>
+        <h3>Instagram Caption Series for a Local Café</h3>
+        <p class="work-tag mono">Social Copy</p>
+        <p class="work-desc">A week's worth of captions written to match a warm, casual brand voice — built for engagement, not just likes.</p>
+        <a href="#" class="work-link">Read piece →</a>
+      </article>
+
+      <article class="work-card">
+        <p class="work-index mono">04</p>
+        <h3>Product Description Set for a Skincare Line</h3>
+        <p class="work-tag mono">E-commerce Copy</p>
+        <p class="work-desc">Concise, benefit-first product descriptions written to convert browsers without overselling.</p>
+        <a href="#" class="work-link">Read piece →</a>
+      </article> -->
+
+      <!--
+      <article class="work-card">
+        <p class="work-index mono">05</p>
+        <h3>Project Title Five</h3>
+        <p class="work-tag mono">Category</p>
+        <p class="work-desc">Short description of the project goes here.</p>
+        <a href="#" class="work-link">Read piece →</a>
+      </article>
+
+      <article class="work-card">
+        <p class="work-index mono">06</p>
+        <h3>Project Title Six</h3>
+        <p class="work-tag mono">Category</p>
+        <p class="work-desc">Short description of the project goes here.</p>
+        <a href="#" class="work-link">Read piece →</a>
+      </article>
+
+      <article class="work-card">
+        <p class="work-index mono">07</p>
+        <h3>Project Title Seven</h3>
+        <p class="work-tag mono">Category</p>
+        <p class="work-desc">Short description of the project goes here.</p>
+        <a href="#" class="work-link">Read piece →</a>
+      </article>
+
+      <article class="work-card">
+        <p class="work-index mono">08</p>
+        <h3>Project Title Eight</h3>
+        <p class="work-tag mono">Category</p>
+        <p class="work-desc">Short description of the project goes here.</p>
+        <a href="#" class="work-link">Read piece →</a>
+      </article>
+
+      <article class="work-card">
+        <p class="work-index mono">09</p>
+        <h3>Project Title Nine</h3>
+        <p class="work-tag mono">Category</p>
+        <p class="work-desc">Short description of the project goes here.</p>
+        <a href="#" class="work-link">Read piece →</a>
+      </article>
+
+      <article class="work-card">
+        <p class="work-index mono">10</p>
+        <h3>Project Title Ten</h3>
+        <p class="work-tag mono">Category</p>
+        <p class="work-desc">Short description of the project goes here.</p>
+        <a href="#" class="work-link">Read piece →</a>
+      </article>
+      -->
+
+    </div>
+  </section>
+
+  <section id="posters" class="section">
+    <h2 class="section-title" data-underline>Posters &amp; Thumbnails</h2>
+    <p class="section-sub">Visual work I've designed alongside my writing — event posters, YouTube thumbnails and social creatives.</p>
+
+    <div class="poster-grid">
+      <figure class="poster-card" onclick="openLightbox(this)">
+        <img src="1.jpg" alt="Describe the poster here" loading="lazy">
+        <figcaption>Just part time thumbnail</figcaption>
+      </figure>
+      <figure class="poster-card" onclick="openLightbox(this)">
+        <img src="2.jpg" alt="Describe the poster here" loading="lazy">
+        <figcaption>Just part time thumbnail</figcaption>
+      </figure>
+      <figure class="poster-card" onclick="openLightbox(this)">
+        <img src="sampleposter.jpg" alt="Describe the poster here" loading="lazy">
+        <figcaption>Just part time poster</figcaption>
+      </figure>
+      <figure class="poster-card" onclick="openLightbox(this)">
+        <img src="3.jpg" alt="Describe the poster here" loading="lazy">
+        <figcaption>Just part time thumbnail</figcaption>
+      </figure>
+      <figure class="poster-card" onclick="openLightbox(this)">
+        <img src="4.jpg" alt="Describe the poster here" loading="lazy">
+        <figcaption>Just part time thumbnail</figcaption>
+      </figure>
+      <figure class="poster-card" onclick="openLightbox(this)">
+        <img src="Untitled design.jpg" alt="Describe the poster here" loading="lazy">
+        <figcaption>Just part time discord banner</figcaption>
+      </figure>
+    </div>
+    <p class="poster-note mono">These are some part-time work of mine in another field that interests me.</p>
+    <!-- To use real images, swap each <figure class="poster-card"> block for:
+      <figure class="poster-card">
+        <img src="images/your-poster.jpg" alt="Describe the poster here" loading="lazy">
+        <figcaption>Poster Title</figcaption>
+      </figure>
+    -->
+  </section>
+
+  <section id="contact" class="section">
+    <h2 class="section-title" data-underline>Contact</h2>
+    <div class="contact-grid">
+      <div class="contact-copy">
+        <p>Have a brief, an idea, or just want to say hi? My inbox is open.</p>
+        <ul class="contact-list mono">
+          <li><a href="mailto:hello@vpwrites.com">hello@vpwrites.com</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+      </div>
+
+      <!-- <form class="contact-form" id="contactForm">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+
+        <button type="submit" class="btn btn-primary">Send message</button>
+        <p class="form-note mono" id="formNote" role="status"></p>
+      </form> -->
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>© <span id="year"></span> VP. Written with care.</p>
+</footer>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close">&times;</span>
+  <div class="lightbox-content" id="lightboxContent"></div>
+</div>
+
+<script>
+  // ===== Theme toggle =====
+  var root = document.documentElement;
+  var themeToggle = document.getElementById('themeToggle');
+  var savedTheme = localStorage.getItem('vp-theme');
+  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+    root.setAttribute('data-theme', 'dark');
+  } else {
+    root.setAttribute('data-theme', 'light');
+  }
+  updateToggleState();
+
+  themeToggle.addEventListener('click', function () {
+    var isDark = root.getAttribute('data-theme') === 'dark';
+    var next = isDark ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('vp-theme', next);
+    updateToggleState();
+  });
+
+  function updateToggleState() {
+    var isDark = root.getAttribute('data-theme') === 'dark';
+    themeToggle.setAttribute('aria-pressed', String(isDark));
+  }
+
+  // ===== Mobile nav =====
+  var menuToggle = document.getElementById('menuToggle');
+  var siteNav = document.getElementById('siteNav');
+
+  menuToggle.addEventListener('click', function () {
+    var open = siteNav.classList.toggle('open');
+    menuToggle.classList.toggle('open', open);
+    menuToggle.setAttribute('aria-expanded', String(open));
+  });
+
+  siteNav.querySelectorAll('.nav-link').forEach(function (link) {
+    link.addEventListener('click', function () {
+      siteNav.classList.remove('open');
+      menuToggle.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // ===== Active nav link on scroll =====
+  var sections = document.querySelectorAll('main .section');
+  var navLinks = document.querySelectorAll('.nav-link');
+
+  var navObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        var id = entry.target.getAttribute('id');
+        navLinks.forEach(function (link) {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+
+  sections.forEach(function (section) { navObserver.observe(section); });
+
+  // ===== Signature underline draw =====
+  document.querySelectorAll('[data-underline]').forEach(function (title) {
+    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('viewBox', '0 0 220 14');
+    svg.setAttribute('class', 'underline-svg');
+    svg.innerHTML = '<path d="M2 8 Q 55 2, 110 8 T 218 7" />';
+    title.after(svg);
+  });
+
+  var underlineObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) entry.target.classList.add('in-view');
+    });
+  }, { threshold: 0.4 });
+
+  document.querySelectorAll('[data-underline]').forEach(function (title) {
+    underlineObserver.observe(title);
+  });
+
+  // ===== Contact form (front-end only) =====
+  var contactForm = document.getElementById('contactForm');
+  var formNote = document.getElementById('formNote');
+
+  contactForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    formNote.textContent = "Thanks — I'll get back to you soon!";
+    contactForm.reset();
+  });
+
+  // ===== Footer year =====
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ===== Lightbox =====
+  function openLightbox(card) {
+    var content = document.getElementById('lightboxContent');
+    var img = card.querySelector('img');
+    if (img) {
+      content.innerHTML = '<img src="' + img.src + '" alt="' + img.alt + '">';
+    } else {
+      content.innerHTML = '<div style="width:min(70vw,600px);max-width:90vw;max-height:90vh;aspect-ratio:4/5;background:' + getComputedStyle(card).backgroundImage + ';background-size:cover;background-position:center;border-radius:8px;"></div>';
+    }
+    document.getElementById('lightbox').classList.add('open');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+  }
+</script>
 </body>
 </html>
